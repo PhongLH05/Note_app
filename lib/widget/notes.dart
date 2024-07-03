@@ -57,21 +57,15 @@ class _NotesState extends State<Notes> {
           Expanded(
             child: NoteList(notes: _registeredNote),
           ),
-          const Spacer(),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                child: ElevatedButton(
+                child: FloatingActionButton(
                   onPressed: _openAddNotesOverlay,
-                  child: const Icon(Icons.add),
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                  ),
-                ),
+                  child: const Icon(Icons.add),                ),
               ),
             ],
           ),
