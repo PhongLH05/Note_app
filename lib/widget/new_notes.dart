@@ -67,7 +67,7 @@ class _NewNotesState extends State<NewNotes> {
             decoration: const InputDecoration(
               label: Text('Content'),
             ),
-            maxLines: 4,
+            maxLines: null,
           ),
           Row(
             children: [

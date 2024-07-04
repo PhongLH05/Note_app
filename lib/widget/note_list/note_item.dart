@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/model/note.dart';
+import 'package:note_app/widget/notes.dart';
 
 class NoteItem extends StatelessWidget {
   const NoteItem(this.note, {super.key});
@@ -19,15 +20,19 @@ class NoteItem extends StatelessWidget {
             ),
             Row(
               children: [
-                Text(note.content),
+                Expanded(child: Text(note.content)),
                 const Spacer(),
                 IconButton(
                   icon: const Icon(Icons.edit),
-                  onPressed: () {},
+                  onPressed: () {
+                   
+                  },
                 ),
                 IconButton(
                   icon: const Icon(Icons.delete),
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                 ),
               ],
             ),

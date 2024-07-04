@@ -15,6 +15,7 @@ class Notes extends StatefulWidget {
 }
 
 class _NotesState extends State<Notes> {
+  int _currentIndex = 0;
   String get formattedDate {
     return formatter.format(DateTime.now());
   }
@@ -22,7 +23,7 @@ class _NotesState extends State<Notes> {
   final List<Note> _registeredNote = [
     Note(
       title: 'Hang out',
-      content: 'hjklfhalsfhl',
+      content: 'hjklfhal sfhl',
       date: DateTime.now(),
     ),
     Note(
@@ -33,7 +34,10 @@ class _NotesState extends State<Notes> {
   ];
 
   void _openAddNotesOverlay() {
-    showModalBottomSheet(isScrollControlled: true, context: context, builder: (ctx) => NewNotes(onAddNote: _addNote));
+    showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (ctx) => NewNotes(onAddNote: _addNote));
   }
 
   void _addNote(Note note) {
@@ -44,7 +48,6 @@ class _NotesState extends State<Notes> {
 
   @override
   Widget build(BuildContext context) {
-    int _currentIndex = 0;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Note'),
@@ -65,7 +68,8 @@ class _NotesState extends State<Notes> {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 child: FloatingActionButton(
                   onPressed: _openAddNotesOverlay,
-                  child: const Icon(Icons.add),                ),
+                  child: const Icon(Icons.add),
+                ),
               ),
             ],
           ),

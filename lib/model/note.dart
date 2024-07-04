@@ -12,4 +12,5 @@ class Note {
   String get formattedDate{
     return formatter.format(date);
   }
+  
 }
