@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/model/note.dart';
 import 'package:note_app/widget/home_note.dart';
-import 'package:note_app/widget/new_notes.dart';
-import 'package:note_app/widget/note_list/note_list.dart';
 import 'package:intl/intl.dart';
+import 'package:note_app/widget/user_note.dart';
 
 final formatter = DateFormat.yMd();
 
@@ -16,7 +14,7 @@ class Notes extends StatefulWidget {
 }
 
 class _NotesState extends State<Notes> {
-  final tabs = [const HomeNote(), Container(child: const Text("User Page"),)];
+  final tabs = [const HomeNote(), const UserNote()];
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -33,12 +31,12 @@ class _NotesState extends State<Notes> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.red,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
             label: 'User',
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.purple,
           ),
         ],
         currentIndex: _currentIndex,

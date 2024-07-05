@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:note_app/model/note.dart';
 import 'package:note_app/widget/new_notes.dart';
 import 'package:note_app/widget/note_list/note_list.dart';
-import 'package:intl/intl.dart';
 
 class HomeNote extends StatefulWidget {
   const HomeNote({super.key});
