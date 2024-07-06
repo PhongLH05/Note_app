@@ -12,7 +12,6 @@ class HomeNote extends StatefulWidget {
 }
 
 class _HomeNoteState extends State<HomeNote> {
-  
   String get formattedDate {
     return formatter.format(DateTime.now());
   }
@@ -20,7 +19,7 @@ class _HomeNoteState extends State<HomeNote> {
   final List<Note> _registeredNote = [
     Note(
       title: 'Hang out',
-      content: 'hjklfhal sfhl',
+      content: 'Nothing',
       date: DateTime.now(),
     ),
     Note(
@@ -29,7 +28,7 @@ class _HomeNoteState extends State<HomeNote> {
       date: DateTime.now(),
     )
   ];
-
+  
   void _openAddNotesOverlay() {
     showModalBottomSheet(
         isScrollControlled: true,
@@ -43,31 +42,59 @@ class _HomeNoteState extends State<HomeNote> {
     });
   }
 
+  void _removeNote(Note note) {
+    final noteIndex = _registeredNote.indexOf(note);
+
+    setState(() {
+      _registeredNote.remove(note);
+    });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(seconds: 3),
+        content: const Text('Note Delete'),
+        action: SnackBarAction(label: 'Undo', onPressed: () {
+          setState(() {
+            _registeredNote.insert(noteIndex, note);
+          });
+        }),
+      ),
+    );
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = const Center(child: Text('No note here!', style: TextStyle(fontSize: 24),),);
+
+    if(_registeredNote.isNotEmpty){
+      mainContent = NoteList(notes: _registeredNote, onRemovenote: _removeNote);
+    }
+
+
     return Column(
-        children: [
-          Text(
-            formattedDate,
-          ),
-          Expanded(
-            child: NoteList(notes: _registeredNote),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                child: FloatingActionButton(
-                  onPressed: _openAddNotesOverlay,
-                  child: const Icon(Icons.add),
-                ),
+      children: [
+        Text(
+          formattedDate,
+          style: const TextStyle(fontSize: 18),
+        ),
+        Expanded(
+          child: mainContent,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              child: FloatingActionButton(
+                onPressed: _openAddNotesOverlay,
+                child: const Icon(Icons.add),
               ),
-            ],
-          ),
-        ],
-      );
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }

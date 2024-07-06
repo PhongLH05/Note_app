@@ -69,18 +69,22 @@ class _NewNotesState extends State<NewNotes> {
             ),
             maxLines: null,
           ),
-          Row(
-            children: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Cancel')),
-              ElevatedButton(
-                onPressed: _submitData,
-                child: const Text('Save'),
-              )
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Row(
+              children: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Cancel')),
+                    const SizedBox(width: 8,),
+                ElevatedButton(
+                  onPressed: _submitData,
+                  child: const Text('Save'),
+                )
+              ],
+            ),
           ),
         ],
       ),

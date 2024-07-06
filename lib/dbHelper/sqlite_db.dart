@@ -1,6 +1,6 @@
-
-
 import 'package:sqflite/sqflite.dart';
+import 'dart:async';
+import 'package:path/path.dart';
 
 class SqliteDb {
   final _dbName = 'note.db';
@@ -8,5 +8,7 @@ class SqliteDb {
 
   initDb() async {
     String path = await getDatabasesPath();
+
+    openDatabase(path);
   }
 }

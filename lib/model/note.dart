@@ -5,8 +5,8 @@ final formatter = DateFormat.yMd();
 class Note {
   Note({required this.title, required this.content, required this.date});
 
-  final String title;
-  final String content;
+   String title;
+   String content;
   final DateTime date;
 
   String get formattedDate{
