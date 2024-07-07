@@ -7,6 +7,7 @@ class UserNote extends StatelessWidget {
     return const Center(
       child: Column(
         children: [
+          SizedBox(height: 12,),
           CircleAvatar(
             radius: 100,
             backgroundImage: AssetImage('assets/image/avatar.jpg'),

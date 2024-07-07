@@ -20,7 +20,7 @@ class _NotesState extends State<Notes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Note'),
+        title: const Text('Note', style: TextStyle(fontSize: 28),),
       ),
       body: tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
