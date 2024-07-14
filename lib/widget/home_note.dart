@@ -28,7 +28,7 @@ class _HomeNoteState extends State<HomeNote> {
       date: DateTime.now(),
     )
   ];
-  
+
   void _openAddNotesOverlay() {
     showModalBottomSheet(
         isScrollControlled: true,
@@ -51,50 +51,111 @@ class _HomeNoteState extends State<HomeNote> {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
         content: const Text('Note Delete'),
-        action: SnackBarAction(label: 'Undo', onPressed: () {
-          setState(() {
-            _registeredNote.insert(noteIndex, note);
-          });
-        }),
+        action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {
+              setState(() {
+                _registeredNote.insert(noteIndex, note);
+              });
+            }),
       ),
     );
   }
 
+  int _selectedOption = 0;
 
+  void _showDialogChoose(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Select an option'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  title: const Text('Note'),
+                  onTap: () {
+                    setState(() {
+                      _selectedOption = 1;
+                      Navigator.of(context).pop();
+                      _openAddNotesOverlay();
+                    });
+                  },
+                ),
+                ListTile(
+                  title: const Text('Todo List'),
+                  onTap: () {
+                    setState(() {
+                      _selectedOption = 2;
+                      Navigator.of(context).pop();
+                      _openAddNotesOverlay();
+                    });
+                  },
+                ),
+                ListTile(
+                  title: const Text('Alarm'),
+                  onTap: () {
+                    setState(() {
+                      _selectedOption = 3;
+                      Navigator.of(context).pop();
+                    });    
+                  },
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+  var _done = false;
+
+  void setDone(bool? isChecked){
+    setState(() {
+      _done = isChecked ?? false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    Widget mainContent = const Center(child: Text('No note here!', style: TextStyle(fontSize: 24),),);
+    Widget mainContent = const Center(
+      child: Text(
+        'No note here!',
+        style: TextStyle(fontSize: 24),
+      ),
+    );
 
-    if(_registeredNote.isNotEmpty){
+    if (_registeredNote.isNotEmpty) {
       mainContent = NoteList(notes: _registeredNote, onRemovenote: _removeNote);
     }
-
-
-    return Column(
-      children: [
-        Text(
-          formattedDate,
-          style: const TextStyle(fontSize: 18),
-        ),
-        Expanded(
-          child: mainContent,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              child: FloatingActionButton(
-                onPressed: _openAddNotesOverlay,
-                child: const Icon(Icons.add),
+    return 
+     Column(
+        children: [
+          Text(
+            formattedDate,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          Expanded(
+            child: mainContent,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                child: FloatingActionButton(
+                  onPressed: () {
+                    _showDialogChoose(context);
+                  },
+                  child: const Icon(Icons.add),
+                ),
               ),
-            ),
-          ],
-        ),
-      ],
-    );
+            ],
+          ),
+        ],
+      );
+    
   }
 }

@@ -62,6 +62,8 @@ class NoteItem extends StatelessWidget {
   //     );
   // }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -75,9 +77,8 @@ class NoteItem extends StatelessWidget {
             ),
             Row(
               children: [
+                // Checkbox(value: , onChanged: onChanged),
                 Expanded(child: Text(note.content)),
-                // const Spacer(),
-                // IconButton(onPressed: () {print('clicked');}, icon: const Icon(Icons.edit))
               ],
             ),
           ],
